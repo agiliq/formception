@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>formception</title>
+    </head>
+    <body>
+        <form action="." method="POST">
+            {% csrf_token %}
+
+            {% for form in formset.forms %}
+
+                {{ form.as_p }}
+
+                {% for form in form.formset %}
+                    {{ form.as_p }}
+                {% endfor %}
+
+                {{ form.formset.management_form }}
+
+            {% endfor %}
+
+            {{ formset.management_form }}
+            <div>
+                <input type="submit" name="submit" value="Submit" />
+                <input type="reset" name="cancel" value="Cancel" />
+        </form>
+    </body>
+</html>

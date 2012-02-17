@@ -6,7 +6,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'formception.views.home', name='home'),
+    url(r'^$', 'profiles.views.home', name='home'),
     # url(r'^formception/', include('formception.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

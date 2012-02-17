@@ -10,11 +10,12 @@ EmailFormSet = modelformset_factory(Email, can_delete=True)
 class ContactForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-
         self.formset = kwargs.pop('formset', None)
+        super(ContactForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Contact
+        exclude = ["emails", ]
 
 
 class BaseContactFormSet(BaseModelFormSet):
@@ -41,7 +42,7 @@ class BaseContactFormSet(BaseModelFormSet):
 
     def save_formsets(self, instance, form):
         emails = form.formset.save()
-        instance.emails.add(emails)
+        instance.emails.add(*emails)
         return instance
 
     def save_new(self, form, commit=True):
