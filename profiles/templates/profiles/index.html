@@ -10,10 +10,14 @@
 
             {% for form in formset.forms %}
 
-                {{ form.as_p }}
+                <table cellspacing="0">
+                    {{ form.as_table }}
+                </table>
 
                 {% for form in form.formset %}
-                    {{ form.as_p }}
+                    <table cellspacing="0">
+                        {{ form.as_table }}
+                    </table>
                 {% endfor %}
 
                 {{ form.formset.management_form }}

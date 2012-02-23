@@ -28,7 +28,13 @@ class BaseContactFormSet(BaseModelFormSet):
         for i in xrange(self.total_form_count()):
             data = self.data or None
             prefix = 'email_formset_%s' % (i)
-            formset = EmailFormSet(data, prefix=prefix)
+            queryset = self.get_queryset()
+            qs = Email.objects.none()
+            if queryset:
+                if len(queryset) > i:
+                    instance = queryset[i]
+                    qs = instance.emails.all()
+            formset = EmailFormSet(data, prefix=prefix, queryset=qs)
             extra_kwargs = {
                 'formset': formset
             }
